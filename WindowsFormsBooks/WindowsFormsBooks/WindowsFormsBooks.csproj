@@ -46,7 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Book.cs" />
+    <Compile Include="Logic\Book.cs" />
+    <Compile Include="Logic\Controller.cs" />
+    <Compile Include="Logic\Messager.cs" />
+    <Compile Include="Logic\Serializer.cs" />
+    <Compile Include="Logic\BookStore.cs" />
     <Compile Include="StoreWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +90,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

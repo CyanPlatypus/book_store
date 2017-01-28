@@ -22,7 +22,7 @@ namespace WindowsFormsBooks
         private void addButton_Click(object sender, EventArgs e)
         {
             //no checking so far
-            NewBook = new Book(titleTextBox.Text, authorTextBox.Text,
+            NewBook = new Book(titleTextBox.Text,"en", authorTextBox.Text,
                 categoryTextBox.Text, Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(priceTextBox.Text)); 
         }
     }

@@ -56,6 +56,7 @@
             this.openButton.TabIndex = 1;
             this.openButton.Text = "Open XML";
             this.openButton.UseVisualStyleBackColor = true;
+            this.openButton.Click += new System.EventHandler(this.openButton_Click);
             // 
             // saveButton
             // 
@@ -65,6 +66,7 @@
             this.saveButton.TabIndex = 2;
             this.saveButton.Text = "Save XML";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // deleteButton
             // 
@@ -95,7 +97,7 @@
             this.reportButton.Text = "HTML Report";
             this.reportButton.UseVisualStyleBackColor = true;
             // 
-            // storeForm
+            // StoreWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -106,7 +108,7 @@
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.storeDataGridView);
-            this.Name = "storeForm";
+            this.Name = "StoreWindow";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.storeDataGridView)).EndInit();
             this.ResumeLayout(false);

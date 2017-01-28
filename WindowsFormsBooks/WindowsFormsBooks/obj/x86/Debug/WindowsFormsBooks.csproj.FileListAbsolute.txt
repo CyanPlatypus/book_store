@@ -26,4 +26,4 @@ D:\VSprojects\Books\WindowsFormsBooks\WindowsFormsBooks\obj\x86\Debug\WindowsFor
 D:\VSprojects\Books\WindowsFormsBooks\WindowsFormsBooks\obj\x86\Debug\WindowsFormsBooks.Properties.Resources.resources
 D:\VSprojects\Books\WindowsFormsBooks\WindowsFormsBooks\obj\x86\Debug\GenerateResource.read.1.tlog
 D:\VSprojects\Books\WindowsFormsBooks\WindowsFormsBooks\obj\x86\Debug\GenerateResource.write.1.tlog
-D:\VSprojects\Books\WindowsFormsBooks\WindowsFormsBooks\obj\x86\Debug\WindowsFormsBooks.ObjectEventArgs.resources
+D:\VSprojects\Books\WindowsFormsBooks\WindowsFormsBooks\obj\x86\Debug\WindowsFormsBooks.StoreWindow.resources

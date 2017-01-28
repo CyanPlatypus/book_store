@@ -11,36 +11,21 @@ using System.IO;
 
 namespace WindowsFormsBooks
 {
-    //public interface IStoreWindow 
-    //{
-    //    BookStore DGVStoreSource { get; set; }
-
-    //    event EventHandler<ObjectEventArgs> OpenButtonClicked;
-    //    event EventHandler<ObjectEventArgs> SaveButtonClicked;
-
-    //}
-
-    public class ObjectEventArgs : EventArgs 
-    {
-        public object Data { get; private set; }
-
-        public ObjectEventArgs(object data) 
-        {
-            this.Data = data;
-        }
-    }
-
     public partial class StoreWindow : Form//, IStoreWindow
     {
         public BindingList<Book> DGVStoreSource { get; set; }
+
+        public Book EditingBook { get; set; }
 
         private NewBookWindow AddBookDialogWindow;// { get; private set; }
 
         public event EventHandler<ObjectEventArgs> OpenButtonClicked;
         public event EventHandler<ObjectEventArgs> SaveButtonClicked;
+        public event EventHandler<ObjectEventArgs> HtmlReportButtonClicked;
 
         public event EventHandler<ObjectEventArgs> DeleteButtonClicked;
         public event EventHandler<ObjectEventArgs> AddButtonClicked;
+        public event EventHandler<ObjectEventArgs> EditButtonClicked;
 
         public StoreWindow(BindingList<Book> DGVSource)
         {
@@ -98,16 +83,16 @@ namespace WindowsFormsBooks
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            NewBookWindow nBWindiw = new NewBookWindow();
+            AddBookDialogWindow = new NewBookWindow();
 
-            if (nBWindiw.ShowDialog(this) == DialogResult.OK)
+            if (AddBookDialogWindow.ShowDialog(this) == DialogResult.OK)
             {
-                Book anotherBook = nBWindiw.NewBook;
+                Book anotherBook = AddBookDialogWindow.DisplayedBook;
                 if (AddButtonClicked != null)
                     AddButtonClicked(this, new ObjectEventArgs(anotherBook));
             }
 
-            nBWindiw.Dispose();
+            AddBookDialogWindow.Dispose();
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -138,5 +123,59 @@ namespace WindowsFormsBooks
             
         }
 
+        private void reportButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "HTML files|*.html";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (HtmlReportButtonClicked != null)
+                    HtmlReportButtonClicked(this, new ObjectEventArgs(saveFileDialog.FileName));
+            }
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in storeDataGridView.SelectedRows)
+            {
+                if (row.Selected)
+                {
+                    int index = row.Index;
+                    if (EditButtonClicked != null)
+                    {
+                        EditButtonClicked(this, new ObjectEventArgs(index));
+                        break;
+                    }
+                }
+            }
+
+            if (EditingBook != null)
+            {
+                AddBookDialogWindow = new NewBookWindow(EditingBook);
+
+                AddBookDialogWindow.ShowDialog(this);
+                //if (AddBookDialogWindow.ShowDialog(this) == DialogResult.OK)
+                //{
+                //    Book anotherBook = AddBookDialogWindow.NewBook;
+                //    if (AddButtonClicked != null)
+                //        AddButtonClicked(this, new ObjectEventArgs(anotherBook));
+                //}
+
+                AddBookDialogWindow.Dispose();
+                EditingBook = null;
+            }
+        }
+
+    }
+
+    public class ObjectEventArgs : EventArgs
+    {
+        public object Data { get; private set; }
+
+        public ObjectEventArgs(object data)
+        {
+            this.Data = data;
+        }
     }
 }

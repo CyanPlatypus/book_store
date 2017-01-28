@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Text.RegularExpressions;
 
 namespace WindowsFormsBooks
 {
@@ -42,6 +43,14 @@ namespace WindowsFormsBooks
             private set { BookTitle.TitleName = value; }
         }
 
+        [XmlIgnore]
+        [Browsable(false)] //makes this propery not represented in DataGridView
+        public string Language
+        {
+            get { return BookTitle.Lang; }
+            private set { BookTitle.Lang = value; }
+        }
+
         private string author;
 
         [XmlIgnore]
@@ -66,10 +75,6 @@ namespace WindowsFormsBooks
         [XmlElement("year")]
         public int Year { get; set; }
 
-        //[Browsable(false)] //makes this propery not represented in DataGridView
-        //[XmlIgnore]
-        //public string Lang { get; set; }
-
         [Browsable(false)] //makes this propery not represented in DataGridView
         [XmlAttribute("cover")]
         public string Cover { get; set; }
@@ -82,14 +87,14 @@ namespace WindowsFormsBooks
         public List<string> Authors { get; set; }
 
         //for one author
-        public Book(string title, string lang, string author, string category, int year, double price, string cover = null)
-            :this()
-        {
-            this.Authors.Add(author);
-            this.Author = author;
+        //public Book(string title, string lang, string author, string category, int year, double price, string cover = null)
+        //    :this()
+        //{
+        //    this.Authors.Add(author);
+        //    this.Author = author;
 
-            InitFields(title, lang, category, year, price, cover);
-        }
+        //    InitFields(title, lang, category, year, price, cover);
+        //}
         //for list of authors
         public Book(string title, string lang, List<string> authors, string category, int year, double price, string cover = null)
         {
@@ -124,6 +129,12 @@ namespace WindowsFormsBooks
                 if ((i + 1) != Authors.Count)
                     author += "; ";
             }
+        }
+
+        public static bool OkForAuthor(string str) 
+        {
+            Regex regex = new Regex("[^0-9;<>%$@#+=]");
+            return regex.IsMatch(str);
         }
     }
 }

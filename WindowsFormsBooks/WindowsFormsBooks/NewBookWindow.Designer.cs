@@ -37,69 +37,91 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.yearLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.priceTextBox = new System.Windows.Forms.TextBox();
+            this.tBoxflowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.languageTextBox = new System.Windows.Forms.TextBox();
+            this.coverTextBox = new System.Windows.Forms.TextBox();
+            this.plusButton = new System.Windows.Forms.Button();
+            this.languageLabel = new System.Windows.Forms.Label();
+            this.coverLabel = new System.Windows.Forms.Label();
+            this.tBoxflowLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // addButton
             // 
+            this.addButton.BackColor = System.Drawing.Color.DarkGray;
             this.addButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.addButton.FlatAppearance.BorderSize = 0;
+            this.addButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.addButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addButton.Location = new System.Drawing.Point(37, 231);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
             this.addButton.TabIndex = 0;
             this.addButton.Text = "Add";
-            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.UseVisualStyleBackColor = false;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // cancelButton
             // 
+            this.cancelButton.BackColor = System.Drawing.Color.DarkGray;
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.cancelButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelButton.Location = new System.Drawing.Point(205, 231);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.UseVisualStyleBackColor = false;
             // 
             // categoryTextBox
             // 
-            this.categoryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.categoryTextBox.Location = new System.Drawing.Point(90, 99);
+            this.categoryTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.categoryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.categoryTextBox.Location = new System.Drawing.Point(80, 94);
             this.categoryTextBox.Name = "categoryTextBox";
-            this.categoryTextBox.Size = new System.Drawing.Size(190, 20);
+            this.categoryTextBox.Size = new System.Drawing.Size(190, 16);
             this.categoryTextBox.TabIndex = 2;
             // 
             // yearTextBox
             // 
-            this.yearTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.yearTextBox.Location = new System.Drawing.Point(90, 125);
+            this.yearTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.yearTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.yearTextBox.Location = new System.Drawing.Point(80, 116);
             this.yearTextBox.Name = "yearTextBox";
-            this.yearTextBox.Size = new System.Drawing.Size(190, 20);
+            this.yearTextBox.Size = new System.Drawing.Size(190, 16);
             this.yearTextBox.TabIndex = 3;
             // 
             // authorTextBox
             // 
-            this.authorTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.authorTextBox.Location = new System.Drawing.Point(90, 73);
+            this.authorTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.authorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.authorTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.authorTextBox.Location = new System.Drawing.Point(3, 3);
             this.authorTextBox.Name = "authorTextBox";
-            this.authorTextBox.Size = new System.Drawing.Size(190, 20);
+            this.authorTextBox.Size = new System.Drawing.Size(190, 16);
             this.authorTextBox.TabIndex = 4;
             // 
             // titleTextBox
             // 
-            this.titleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.titleTextBox.Location = new System.Drawing.Point(90, 47);
+            this.titleTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.titleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.titleTextBox.Location = new System.Drawing.Point(80, 50);
             this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(190, 20);
+            this.titleTextBox.Size = new System.Drawing.Size(190, 16);
             this.titleTextBox.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 50);
+            this.label1.Location = new System.Drawing.Point(16, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 6;
@@ -107,8 +129,9 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 76);
+            this.label2.Location = new System.Drawing.Point(325, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 7;
@@ -117,25 +140,25 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 102);
+            this.label3.Location = new System.Drawing.Point(16, 96);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Category";
             // 
-            // label4
+            // yearLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 128);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Year";
+            this.yearLabel.AutoSize = true;
+            this.yearLabel.Location = new System.Drawing.Point(18, 118);
+            this.yearLabel.Name = "yearLabel";
+            this.yearLabel.Size = new System.Drawing.Size(29, 13);
+            this.yearLabel.TabIndex = 9;
+            this.yearLabel.Text = "Year";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 154);
+            this.label5.Location = new System.Drawing.Point(16, 140);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 10;
@@ -145,7 +168,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label6.Location = new System.Drawing.Point(86, 9);
+            this.label6.Location = new System.Drawing.Point(251, 9);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(112, 20);
             this.label6.TabIndex = 11;
@@ -153,32 +176,103 @@
             // 
             // priceTextBox
             // 
-            this.priceTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.priceTextBox.Location = new System.Drawing.Point(90, 151);
+            this.priceTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.priceTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.priceTextBox.Location = new System.Drawing.Point(80, 138);
             this.priceTextBox.Name = "priceTextBox";
-            this.priceTextBox.Size = new System.Drawing.Size(190, 20);
+            this.priceTextBox.Size = new System.Drawing.Size(190, 16);
             this.priceTextBox.TabIndex = 12;
+            // 
+            // tBoxflowLayoutPanel
+            // 
+            this.tBoxflowLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tBoxflowLayoutPanel.Controls.Add(this.authorTextBox);
+            this.tBoxflowLayoutPanel.Location = new System.Drawing.Point(365, 47);
+            this.tBoxflowLayoutPanel.Name = "tBoxflowLayoutPanel";
+            this.tBoxflowLayoutPanel.Size = new System.Drawing.Size(209, 220);
+            this.tBoxflowLayoutPanel.TabIndex = 0;
+            // 
+            // languageTextBox
+            // 
+            this.languageTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.languageTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.languageTextBox.Location = new System.Drawing.Point(80, 72);
+            this.languageTextBox.Name = "languageTextBox";
+            this.languageTextBox.Size = new System.Drawing.Size(190, 16);
+            this.languageTextBox.TabIndex = 13;
+            // 
+            // coverTextBox
+            // 
+            this.coverTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.coverTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.coverTextBox.Location = new System.Drawing.Point(80, 160);
+            this.coverTextBox.Name = "coverTextBox";
+            this.coverTextBox.Size = new System.Drawing.Size(190, 16);
+            this.coverTextBox.TabIndex = 14;
+            // 
+            // plusButton
+            // 
+            this.plusButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.plusButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.plusButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.plusButton.FlatAppearance.BorderSize = 0;
+            this.plusButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.plusButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.plusButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.plusButton.Location = new System.Drawing.Point(330, 76);
+            this.plusButton.Name = "plusButton";
+            this.plusButton.Size = new System.Drawing.Size(23, 23);
+            this.plusButton.TabIndex = 15;
+            this.plusButton.Text = "+";
+            this.plusButton.UseVisualStyleBackColor = false;
+            this.plusButton.Click += new System.EventHandler(this.plusButton_Click);
+            // 
+            // languageLabel
+            // 
+            this.languageLabel.AutoSize = true;
+            this.languageLabel.Location = new System.Drawing.Point(16, 74);
+            this.languageLabel.Name = "languageLabel";
+            this.languageLabel.Size = new System.Drawing.Size(55, 13);
+            this.languageLabel.TabIndex = 16;
+            this.languageLabel.Text = "Language";
+            // 
+            // coverLabel
+            // 
+            this.coverLabel.AutoSize = true;
+            this.coverLabel.Location = new System.Drawing.Point(18, 162);
+            this.coverLabel.Name = "coverLabel";
+            this.coverLabel.Size = new System.Drawing.Size(35, 13);
+            this.coverLabel.TabIndex = 17;
+            this.coverLabel.Text = "Cover";
             // 
             // NewBookWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.ClientSize = new System.Drawing.Size(574, 266);
+            this.Controls.Add(this.coverLabel);
+            this.Controls.Add(this.languageLabel);
+            this.Controls.Add(this.plusButton);
+            this.Controls.Add(this.coverTextBox);
+            this.Controls.Add(this.languageTextBox);
+            this.Controls.Add(this.tBoxflowLayoutPanel);
             this.Controls.Add(this.priceTextBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.yearLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.titleTextBox);
-            this.Controls.Add(this.authorTextBox);
             this.Controls.Add(this.yearTextBox);
             this.Controls.Add(this.categoryTextBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.addButton);
             this.Name = "NewBookWindow";
             this.Text = "NewBookWindow";
+            this.tBoxflowLayoutPanel.ResumeLayout(false);
+            this.tBoxflowLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,9 +289,15 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label yearLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox priceTextBox;
+        private System.Windows.Forms.FlowLayoutPanel tBoxflowLayoutPanel;
+        private System.Windows.Forms.TextBox languageTextBox;
+        private System.Windows.Forms.TextBox coverTextBox;
+        private System.Windows.Forms.Button plusButton;
+        private System.Windows.Forms.Label languageLabel;
+        private System.Windows.Forms.Label coverLabel;
     }
 }

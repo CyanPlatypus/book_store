@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+
 
 namespace WindowsFormsBooks
 {
@@ -11,31 +13,48 @@ namespace WindowsFormsBooks
         private BookStore controllerBookStore;
         public StoreWindow ControllerMainStoreWindow { get; private set; }
         public IMessager ControlerMessager { get; private set; }
-        public Serializer<BookStore> ControllerSerializer { get; private set; }
+        public XmlManager<BookStore> ControllerXMLManager { get; private set; }
 
         public Controller(IMessager messager) 
         {
             this.ControlerMessager = messager;
-            this.ControllerSerializer = new Serializer<BookStore>();
+            this.ControllerXMLManager = new XmlManager<BookStore>();
             this.controllerBookStore = new BookStore();
 
             this.ControllerMainStoreWindow = new StoreWindow(controllerBookStore.StoreBooksBindingList);
-            ControllerMainStoreWindow.OpenButtonClicked += new EventHandler<ObjectEventArgs>(ControllerMainStoreWindow_OpenButtonClicked);
-            ControllerMainStoreWindow.SaveButtonClicked += new EventHandler<ObjectEventArgs>(ControllerMainStoreWindow_SaveButtonClicked);
-            ControllerMainStoreWindow.AddButtonClicked += new EventHandler<ObjectEventArgs>(ControllerMainStoreWindow_AddButtonClicked);
-            ControllerMainStoreWindow.DeleteButtonClicked += new EventHandler<ObjectEventArgs>(ControllerMainStoreWindow_DeleteButtonClicked);
+            ControllerMainStoreWindow.OpenButtonClicked += ControllerMainStoreWindow_OpenButtonClicked;
+            ControllerMainStoreWindow.SaveButtonClicked += ControllerMainStoreWindow_SaveButtonClicked;
+            ControllerMainStoreWindow.HtmlReportButtonClicked += ControllerMainStoreWindow_HtmlReportButtonClicked;
+
+            ControllerMainStoreWindow.AddButtonClicked += ControllerMainStoreWindow_AddButtonClicked;
+            ControllerMainStoreWindow.DeleteButtonClicked += ControllerMainStoreWindow_DeleteButtonClicked;
+            ControllerMainStoreWindow.EditButtonClicked += ControllerMainStoreWindow_EditButtonClicked;
+            
+        }
+
+        void ControllerMainStoreWindow_EditButtonClicked(object sender, ObjectEventArgs e)
+        {
+            ControllerMainStoreWindow.EditingBook = controllerBookStore.ReturnBookAt((int)e.Data);
+        }
+
+        void ControllerMainStoreWindow_HtmlReportButtonClicked(object sender, ObjectEventArgs e)
+        {
+            string message = string.Empty;
+
+            File.WriteAllText("bookstoreStyle.xsl", WindowsFormsBooks.Properties.Resources.bookstoreStyle);
+
+            if (!ControllerXMLManager.TryConvertFromXMLAndResourcesToHTML((string)e.Data, "doc.xml", WindowsFormsBooks.Properties.Resources.bookstoreStyle, controllerBookStore, out message))
+                ControlerMessager.ShowMessage(message);
         }
 
         void ControllerMainStoreWindow_DeleteButtonClicked(object sender, ObjectEventArgs e)
         {
             controllerBookStore.RemoveBookAt((int)e.Data);
-            //ControllerMainStoreWindow.DGVStoreSource = controllerBookStore.StoreBooksBindingList;
         }
 
         void ControllerMainStoreWindow_AddButtonClicked(object sender, ObjectEventArgs e)
         {
             controllerBookStore.AddBook((Book)e.Data);
-            //ControllerMainStoreWindow.DGVStoreSource = controllerBookStore.StoreBooksBindingList;
         }
 
         void ControllerMainStoreWindow_SaveButtonClicked(object sender, ObjectEventArgs e)
@@ -44,9 +63,8 @@ namespace WindowsFormsBooks
 
             string path = (string)e.Data;
 
-            if (!ControllerSerializer.Serialize(path, controllerBookStore, out message))
+            if (!ControllerXMLManager.TrySerializeToXML(path, controllerBookStore, out message))
                 ControlerMessager.ShowMessage(message);
-            //ControllerMainStoreWindow.DGVStoreSource = controllerBookStore.StoreBooksBindingList;
         }
 
         void ControllerMainStoreWindow_OpenButtonClicked(object sender, ObjectEventArgs e)
@@ -55,7 +73,7 @@ namespace WindowsFormsBooks
 
             string path = (string)e.Data;
 
-            if(!ControllerSerializer.Deserialize(path, ref controllerBookStore, out message))
+            if(!ControllerXMLManager.TryDeserializeFromXML(path, ref controllerBookStore, out message))
                 ControlerMessager.ShowError(message);
             else
                 ControllerMainStoreWindow.DGVStoreSource = controllerBookStore.StoreBooksBindingList;

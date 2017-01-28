@@ -24,10 +24,10 @@ namespace WindowsFormsBooks
             //BookWindow = new NewBookWindow();
         }
 
-        public void AddBook(string title, string lan, string author, string category, int year, double price, string cover = null)
-        {
-            StoreBooksBindingList.Add(new Book ( title, lan, author, category, year, price, cover));
-        }
+        //public void AddBook(string title, string lan, string author, string category, int year, double price, string cover = null)
+        //{
+        //    StoreBooksBindingList.Add(new Book ( title, lan, author, category, year, price, cover));
+        //}
 
         public void AddBook(string title, string lang, List<string> authors, string category, int year, double price, string cover = null)
         {
@@ -43,6 +43,13 @@ namespace WindowsFormsBooks
         {
             if (InRange(index))
                 StoreBooksBindingList.RemoveAt(index);
+        }
+
+        public Book ReturnBookAt(int index) 
+        {
+            if (InRange(index))
+                return StoreBooksBindingList[index];
+            return null;
         }
 
         private bool InRange(int index) 

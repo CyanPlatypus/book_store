@@ -55,6 +55,7 @@
             // 
             this.addButton.BackColor = System.Drawing.Color.DarkGray;
             this.addButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.addButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.addButton.FlatAppearance.BorderSize = 0;
             this.addButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.addButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -63,7 +64,7 @@
             this.addButton.Location = new System.Drawing.Point(37, 231);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
-            this.addButton.TabIndex = 0;
+            this.addButton.TabIndex = 8;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = false;
             this.addButton.EnabledChanged += new System.EventHandler(this.addButton_EnabledChanged);
@@ -73,6 +74,7 @@
             // 
             this.cancelButton.BackColor = System.Drawing.Color.DarkGray;
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cancelButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -80,7 +82,7 @@
             this.cancelButton.Location = new System.Drawing.Point(205, 231);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 1;
+            this.cancelButton.TabIndex = 10;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = false;
             // 
@@ -91,7 +93,7 @@
             this.categoryTextBox.Location = new System.Drawing.Point(80, 94);
             this.categoryTextBox.Name = "categoryTextBox";
             this.categoryTextBox.Size = new System.Drawing.Size(190, 16);
-            this.categoryTextBox.TabIndex = 2;
+            this.categoryTextBox.TabIndex = 3;
             // 
             // yearTextBox
             // 
@@ -100,7 +102,7 @@
             this.yearTextBox.Location = new System.Drawing.Point(80, 116);
             this.yearTextBox.Name = "yearTextBox";
             this.yearTextBox.Size = new System.Drawing.Size(190, 16);
-            this.yearTextBox.TabIndex = 3;
+            this.yearTextBox.TabIndex = 4;
             // 
             // authorTextBox
             // 
@@ -110,7 +112,7 @@
             this.authorTextBox.Location = new System.Drawing.Point(3, 3);
             this.authorTextBox.Name = "authorTextBox";
             this.authorTextBox.Size = new System.Drawing.Size(190, 16);
-            this.authorTextBox.TabIndex = 4;
+            this.authorTextBox.TabIndex = 8;
             // 
             // titleTextBox
             // 
@@ -119,7 +121,7 @@
             this.titleTextBox.Location = new System.Drawing.Point(80, 50);
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(190, 16);
-            this.titleTextBox.TabIndex = 5;
+            this.titleTextBox.TabIndex = 1;
             // 
             // label1
             // 
@@ -183,7 +185,7 @@
             this.priceTextBox.Location = new System.Drawing.Point(80, 138);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(190, 16);
-            this.priceTextBox.TabIndex = 12;
+            this.priceTextBox.TabIndex = 5;
             // 
             // tBoxflowLayoutPanel
             // 
@@ -193,7 +195,7 @@
             this.tBoxflowLayoutPanel.Location = new System.Drawing.Point(359, 47);
             this.tBoxflowLayoutPanel.Name = "tBoxflowLayoutPanel";
             this.tBoxflowLayoutPanel.Size = new System.Drawing.Size(199, 220);
-            this.tBoxflowLayoutPanel.TabIndex = 0;
+            this.tBoxflowLayoutPanel.TabIndex = 7;
             // 
             // languageTextBox
             // 
@@ -202,7 +204,7 @@
             this.languageTextBox.Location = new System.Drawing.Point(80, 72);
             this.languageTextBox.Name = "languageTextBox";
             this.languageTextBox.Size = new System.Drawing.Size(190, 16);
-            this.languageTextBox.TabIndex = 13;
+            this.languageTextBox.TabIndex = 2;
             // 
             // coverTextBox
             // 
@@ -211,20 +213,20 @@
             this.coverTextBox.Location = new System.Drawing.Point(80, 160);
             this.coverTextBox.Name = "coverTextBox";
             this.coverTextBox.Size = new System.Drawing.Size(190, 16);
-            this.coverTextBox.TabIndex = 14;
+            this.coverTextBox.TabIndex = 6;
             // 
             // plusButton
             // 
-            this.plusButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.plusButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.plusButton.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.plusButton.FlatAppearance.BorderColor = System.Drawing.Color.LightSeaGreen;
             this.plusButton.FlatAppearance.BorderSize = 0;
             this.plusButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
-            this.plusButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.plusButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkCyan;
             this.plusButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plusButton.Location = new System.Drawing.Point(324, 76);
             this.plusButton.Name = "plusButton";
             this.plusButton.Size = new System.Drawing.Size(23, 23);
-            this.plusButton.TabIndex = 15;
+            this.plusButton.TabIndex = 9;
             this.plusButton.Text = "+";
             this.plusButton.UseVisualStyleBackColor = false;
             this.plusButton.Click += new System.EventHandler(this.plusButton_Click);

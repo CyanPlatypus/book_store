@@ -15,9 +15,11 @@ namespace WindowsFormsBooks
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
-            Controller controller = new Controller(new Messager());
-            Application.Run(controller.ControllerMainStoreWindow);
+
+            BookStore bs = new BookStore();
+            Controller controller = new Controller(bs, new Messager(), new StoreWindow(bs.StoreBooksBindingList));
+
+            Application.Run((Form)controller.ControllerMainStoreWindow);
         }
     }
 }

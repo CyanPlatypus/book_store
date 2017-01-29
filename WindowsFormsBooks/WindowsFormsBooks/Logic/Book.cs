@@ -12,7 +12,6 @@ namespace WindowsFormsBooks
     [XmlType("title")]
     public class Title 
     {
-        //[Browsable(false)] //makes this propery not represented in DataGridView
         [XmlAttribute("lang")]
         public string Lang { get; set; }
 
@@ -33,17 +32,14 @@ namespace WindowsFormsBooks
     [XmlType("book")]
     public class Book
     {
-        //[DisplayName("Title")] //changes the name of the column in DataGrid view
-        //[XmlElement(ElementName = "title")]
-
-        [XmlIgnore]
+        [XmlIgnore] //makes this prorerty not xml serializable
         public string Title 
         { 
             get { return BookTitle.TitleName; }
             private set { BookTitle.TitleName = value; }
         }
 
-        [XmlIgnore]
+        [XmlIgnore] //makes this prorerty not xml serializable
         [Browsable(false)] //makes this propery not represented in DataGridView
         public string Language
         {
@@ -53,7 +49,7 @@ namespace WindowsFormsBooks
 
         private string author;
 
-        [XmlIgnore]
+        [XmlIgnore] //makes this prorerty not xml serializable
         public string Author 
         {
             get 
@@ -68,7 +64,7 @@ namespace WindowsFormsBooks
         [XmlElement("title")]
         public Title BookTitle { get; set; }
 
-        [XmlAttribute("category")]
+        [XmlAttribute("category")] // mekes this property look like attribute in xml
         public string Category { get; set; }
         
         [Browsable(false)] //makes this propery not represented in DataGridView
@@ -76,7 +72,7 @@ namespace WindowsFormsBooks
         public int Year { get; set; }
 
         [Browsable(false)] //makes this propery not represented in DataGridView
-        [XmlAttribute("cover")]
+        [XmlAttribute("cover")] // mekes this property look like attribute in xml
         public string Cover { get; set; }
         
         [XmlElement("price")]
@@ -86,16 +82,6 @@ namespace WindowsFormsBooks
         [XmlElement("author")]
         public List<string> Authors { get; set; }
 
-        //for one author
-        //public Book(string title, string lang, string author, string category, int year, double price, string cover = null)
-        //    :this()
-        //{
-        //    this.Authors.Add(author);
-        //    this.Author = author;
-
-        //    InitFields(title, lang, category, year, price, cover);
-        //}
-        //for list of authors
         public Book(string title, string lang, List<string> authors, string category, int year, double price, string cover = null)
         {
             Edit(title, lang, authors, category, year, price, cover);
@@ -133,6 +119,7 @@ namespace WindowsFormsBooks
             InitFields(title, lang, category, year, price, cover);
         }
 
+        //makes the string of authors in the list
         private void UpdateAuthor() 
         {
             author = string.Empty;
@@ -183,7 +170,7 @@ namespace WindowsFormsBooks
         public static bool OkForPrice(string str)
         {
             double res;
-            if (Double.TryParse(str, out res))
+            if (Double.TryParse(str, out res) && (res > 0))
                 return true;
             return false;
         }
@@ -192,7 +179,7 @@ namespace WindowsFormsBooks
         {
             int year = DateTime.Now.Year;
             int res;
-            if (Int32.TryParse(str, out res) && (res <= year))
+            if (Int32.TryParse(str, out res) && (res <= year) && (res > 0))
                 return true;
             return false;
         }

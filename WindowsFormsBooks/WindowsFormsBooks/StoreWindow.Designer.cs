@@ -55,10 +55,11 @@
             // 
             // openButton
             // 
-            this.openButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.openButton.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.openButton.FlatAppearance.BorderColor = System.Drawing.Color.LightSeaGreen;
             this.openButton.FlatAppearance.BorderSize = 0;
             this.openButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
-            this.openButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.openButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkCyan;
             this.openButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openButton.Location = new System.Drawing.Point(12, 12);
             this.openButton.Name = "openButton";
@@ -71,10 +72,11 @@
             // saveButton
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.saveButton.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.saveButton.FlatAppearance.BorderColor = System.Drawing.Color.LightSeaGreen;
             this.saveButton.FlatAppearance.BorderSize = 0;
             this.saveButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
-            this.saveButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.saveButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkCyan;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.Location = new System.Drawing.Point(435, 12);
             this.saveButton.Name = "saveButton";
@@ -88,6 +90,7 @@
             // 
             this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.deleteButton.BackColor = System.Drawing.Color.DarkGray;
+            this.deleteButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.deleteButton.FlatAppearance.BorderSize = 0;
             this.deleteButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.deleteButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -104,7 +107,7 @@
             // 
             this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.addButton.BackColor = System.Drawing.Color.DarkGray;
-            this.addButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Window;
+            this.addButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.addButton.FlatAppearance.BorderSize = 0;
             this.addButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.addButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -121,6 +124,7 @@
             // 
             this.reportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.reportButton.BackColor = System.Drawing.Color.Orange;
+            this.reportButton.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
             this.reportButton.FlatAppearance.BorderSize = 0;
             this.reportButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.reportButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Peru;
@@ -128,7 +132,7 @@
             this.reportButton.Location = new System.Drawing.Point(425, 350);
             this.reportButton.Name = "reportButton";
             this.reportButton.Size = new System.Drawing.Size(85, 23);
-            this.reportButton.TabIndex = 5;
+            this.reportButton.TabIndex = 6;
             this.reportButton.Text = "HTML Report";
             this.reportButton.UseVisualStyleBackColor = false;
             this.reportButton.Click += new System.EventHandler(this.reportButton_Click);
@@ -137,6 +141,7 @@
             // 
             this.editButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.editButton.BackColor = System.Drawing.Color.DarkGray;
+            this.editButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.editButton.FlatAppearance.BorderSize = 0;
             this.editButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.editButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -144,7 +149,7 @@
             this.editButton.Location = new System.Drawing.Point(174, 350);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(75, 23);
-            this.editButton.TabIndex = 6;
+            this.editButton.TabIndex = 5;
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = false;
             this.editButton.Click += new System.EventHandler(this.editButton_Click);

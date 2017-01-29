@@ -12,13 +12,11 @@ namespace WindowsFormsBooks
 {
     public class XmlManager<T>
     {
-        //public Serializer(){}
-
         public bool TrySerializeToXML(string filepath, T whatToSerialize, out string message)
         {
             message = string.Empty; 
 
-            //using (FileStream fs = new FileStream(filepath, FileMode.Create))
+            //serialize to xml
             using (StreamWriter fs = new StreamWriter(new FileStream(filepath, FileMode.Create), Encoding.UTF8))
             {
                 try
@@ -42,8 +40,8 @@ namespace WindowsFormsBooks
         {
             message = string.Empty;
 
+            //deserialize from xml
             if (FileExists(filepath))
-                //using (FileStream fs = new FileStream(filepath, FileMode.Open))
                 using (StreamReader fs = new StreamReader(new FileStream(filepath, FileMode.Open), Encoding.UTF8))
                 {
                     try
@@ -51,7 +49,6 @@ namespace WindowsFormsBooks
                         XmlSerializer serializer = new XmlSerializer(typeof(T));
 
                         whereToDeserialize = (T)serializer.Deserialize(fs);
-                        //storeDataGridView.DataSource = Store.StoreBooksBindingList;
                         return true;
                     }
                     catch (Exception e)
@@ -63,17 +60,6 @@ namespace WindowsFormsBooks
             message = "File doesn't exist.";
             return false;
         }
-
-        //public bool TryConvertFromXMLAndXSLToHTML(string htmlPath, string xmlPath, string xslPath, out string message)
-        //{
-        //    XslTransform xslt = new XslTransform();
-        //    xslt.Load(xslPath);
-        //    XPathDocument xpathdocument = new XPathDocument(xmlPath);
-        //    XmlTextWriter writer = new XmlTextWriter(htmlPath, Encoding.UTF8);
-        //    writer.Formatting = Formatting.Indented;
-
-        //    xslt.Transform(xpathdocument, null, writer, null);  
-        //}
 
         public bool TryConvertFromXMLAndXSLToHTML(string htmlPath, string xmlPath, string xslPath, T whatToserialize, out string message)
         {

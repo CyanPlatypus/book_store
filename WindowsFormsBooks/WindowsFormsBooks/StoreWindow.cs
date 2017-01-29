@@ -11,13 +11,29 @@ using System.IO;
 
 namespace WindowsFormsBooks
 {
-    public partial class StoreWindow : Form//, IStoreWindow
+    public interface IBookStoreWindow 
     {
-        public BindingList<Book> DGVStoreSource { get; set; }
+        BindingList<Book> DGVStoreSource { get; set; }
+        Book EditingBook { get; set; }
 
-        public Book EditingBook { get; set; }
+        event EventHandler<ObjectEventArgs> OpenButtonClicked;
+        event EventHandler<ObjectEventArgs> SaveButtonClicked;
+        event EventHandler<ObjectEventArgs> HtmlReportButtonClicked;
 
-        private NewBookWindow AddBookDialogWindow;// { get; private set; }
+        event EventHandler<ObjectEventArgs> DeleteButtonClicked;
+        event EventHandler<ObjectEventArgs> AddButtonClicked;
+        event EventHandler<ObjectEventArgs> EditButtonClicked;
+
+        event EventHandler<ObjectEventArgs> ErrorOccurred;
+    }
+
+    public partial class StoreWindow : Form, IBookStoreWindow
+    {
+        public BindingList<Book> DGVStoreSource { get; set; } //souce for DataGridView
+
+        public Book EditingBook { get; set; } // the Book that is being edited
+
+        private NewBookWindow AddBookDialogWindow; //window for ading and aditing Book 
 
         public event EventHandler<ObjectEventArgs> OpenButtonClicked;
         public event EventHandler<ObjectEventArgs> SaveButtonClicked;
@@ -27,56 +43,30 @@ namespace WindowsFormsBooks
         public event EventHandler<ObjectEventArgs> AddButtonClicked;
         public event EventHandler<ObjectEventArgs> EditButtonClicked;
 
+        public event EventHandler<ObjectEventArgs> ErrorOccurred;
+
         public StoreWindow(BindingList<Book> DGVSource)
         {
-            //Dictionary<Type, string> dic = new Dictionary<Type, string> { { typeof(int), "hight" }, { typeof(string), "name" } };
-
             DGVStoreSource = DGVSource;
 
-            //DGVStoreSource = new BookStore(); 
-
             InitializeComponent();
-
-            //DGVStoreSource.AddBook("Emma comes back", "en", "Tom Tompson", "History", 1999, 133);
-            //DGVStoreSource.AddBook("Tom comes back","en", "Tom Tompson", "History", 1998, 133);
 
             storeDataGridView.DataSource = DGVStoreSource;
             storeDataGridView.AllowUserToAddRows = false;
 
-            //DGVStoreSource.AddBook("Anna comes back", "en", new List<string>{"Tilda Ma","Thory" }, "History", 1998, 133);
-            //DGVStoreSource.AddBook("Danniel comes back", "en", "Tom Tompson", "History", 1998, 133, "Hard");
-
         }
-
-        //private void PlaceAllColumns(DataGridView dgv) 
-        //{
-        //    PlaceColumnWithTextAndName( "Title", "title", dgv);
-        //    PlaceColumnWithTextAndName("Author", "author", dgv);
-        //    PlaceColumnWithTextAndName("Category", "category", dgv);
-        //    PlaceColumnWithTextAndName("Year", "year", dgv);
-        //}
-
-        //private void PlaceColumnWithTextAndName(string text, string name, DataGridView dgv) 
-        //{
-        //    var column = new DataGridViewColumn();
-        //    column.HeaderText = text;
-        //    column.Name = name;
-        //    column.CellTemplate = new DataGridViewTextBoxCell();
-
-        //    dgv.Columns.Add(column);
-        //}
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
+            //looks for all selected rows and gives their number to controller, using ObjectEventArgs
             foreach (DataGridViewRow row in storeDataGridView.SelectedRows) 
             {
                 if (row.Selected) 
                 {
                     int index = row.Index;
-                    //storeDataGridView.Rows.RemoveAt(index);
+
                     if (DeleteButtonClicked != null)
                         DeleteButtonClicked(this, new ObjectEventArgs(index));
-                    //DGVStoreSource.RemoveBookAt(index);
                 }
             }
         }
@@ -84,10 +74,15 @@ namespace WindowsFormsBooks
         private void addButton_Click(object sender, EventArgs e)
         {
             AddBookDialogWindow = new NewBookWindow();
+            AddBookDialogWindow.ErrorOccurred += AddBookDialogWindow_ErrorOccured;
 
             if (AddBookDialogWindow.ShowDialog(this) == DialogResult.OK)
             {
+                //retrieves information about book from NewBookWindow
                 Book anotherBook = AddBookDialogWindow.DisplayedBook;
+
+                //generates event, that tells that the instance of the Book was made 
+                //and sends that instans in ObjectEventArgs
                 if (AddButtonClicked != null)
                     AddButtonClicked(this, new ObjectEventArgs(anotherBook));
             }
@@ -102,6 +97,7 @@ namespace WindowsFormsBooks
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK) 
             {
+                //generates event, that signalizes that user wants to open a file with name 
                 if (SaveButtonClicked != null)
                     SaveButtonClicked(this, new ObjectEventArgs(saveFileDialog.FileName));
             }
@@ -114,7 +110,6 @@ namespace WindowsFormsBooks
 
             if (openFileDialog.ShowDialog() == DialogResult.OK) 
             {
-
                 if (OpenButtonClicked != null)
                     OpenButtonClicked(this, new ObjectEventArgs(openFileDialog.FileName));
 
@@ -153,6 +148,7 @@ namespace WindowsFormsBooks
             if (EditingBook != null)
             {
                 AddBookDialogWindow = new NewBookWindow(EditingBook);
+                AddBookDialogWindow.ErrorOccurred += AddBookDialogWindow_ErrorOccured;
 
                 if (AddBookDialogWindow.ShowDialog(this) == DialogResult.OK)
                 {
@@ -163,6 +159,12 @@ namespace WindowsFormsBooks
                 
                 EditingBook = null;
             }
+        }
+
+        private void AddBookDialogWindow_ErrorOccured(object sender, ObjectEventArgs e) 
+        {
+            if (ErrorOccurred != null)
+                ErrorOccurred(this, e);
         }
 
     }

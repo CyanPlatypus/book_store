@@ -16,7 +16,7 @@ namespace WindowsFormsBooks
         private static readonly Color errorColor = Color.LightCoral;
         private static readonly Color noErrorColor = Color.White;
 
-        private static readonly Color minusBackColor = Color.Silver;
+        private static readonly Color minusBackColor = Color.Silver;//LightCoral
         private static readonly Color minusMouseDownBackColor = Color.Gray;
         private static readonly Color minusMouseOverBackColor = Color.DarkGray;
 
@@ -26,6 +26,8 @@ namespace WindowsFormsBooks
 
         private static readonly Color enabledForeColor = Color.Black;
         private static readonly Color disabledForeColor = Color.WhiteSmoke;
+
+        public event EventHandler<ObjectEventArgs> ErrorOccurred;
 
         public NewBookWindow(Book book = null)
         {
@@ -131,7 +133,7 @@ namespace WindowsFormsBooks
                 Height = 16, Width =16,
                 FlatStyle = FlatStyle.Flat,
                 BackColor = minusBackColor,
-                Text = "x",
+                Text = "X",
                 Font = new Font("MicrosoftSansSerif", 5)
             };
             b.FlatAppearance.BorderSize = 0;
@@ -168,14 +170,31 @@ namespace WindowsFormsBooks
 
             if (DisplayedBook != null)
             {
-                DisplayedBook.Edit(titleTextBox.Text, languageTextBox.Text, 
-                    authors, categoryTextBox.Text, Convert.ToInt32(yearTextBox.Text), 
-                    Convert.ToDouble(priceTextBox.Text), coverTextBox.Text);
+                try
+                {
+                    DisplayedBook.Edit(titleTextBox.Text, languageTextBox.Text,
+                        authors, categoryTextBox.Text, Convert.ToInt32(yearTextBox.Text),
+                        Convert.ToDouble(priceTextBox.Text), coverTextBox.Text);
+                }
+                catch (Exception ex)
+                {
+                    if (ErrorOccurred != null)
+                        ErrorOccurred(this, new ObjectEventArgs("Invalid field value."));
+                }
             }
             else
-                DisplayedBook = new Book(titleTextBox.Text, languageTextBox.Text,
+                try
+                {
+                    DisplayedBook = new Book(titleTextBox.Text, languageTextBox.Text,
                     authors, categoryTextBox.Text, Convert.ToInt32(yearTextBox.Text),
-                    Convert.ToDouble(priceTextBox.Text), coverTextBox.Text); 
+                    Convert.ToDouble(priceTextBox.Text), coverTextBox.Text);
+                }
+                catch (Exception ex)
+                {
+                    if (ErrorOccurred != null)
+                        ErrorOccurred(this, new ObjectEventArgs("Invalid field value."));
+                }
+
         }
 
         private void addButton_EnabledChanged(object sender, EventArgs e)

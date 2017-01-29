@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.IO;
 
 
 namespace WindowsFormsBooks
 {
     public class Controller
     {
-        //public BookStore ControllerStore { get { return controllerBookStore; } private set { controllerBookStore = value; } }
         private BookStore controllerBookStore;
         public StoreWindow ControllerMainStoreWindow { get; private set; }
         public IMessager ControlerMessager { get; private set; }
@@ -40,8 +38,6 @@ namespace WindowsFormsBooks
         void ControllerMainStoreWindow_HtmlReportButtonClicked(object sender, ObjectEventArgs e)
         {
             string message = string.Empty;
-
-            File.WriteAllText("bookstoreStyle.xsl", WindowsFormsBooks.Properties.Resources.bookstoreStyle);
 
             if (!ControllerXMLManager.TryConvertFromXMLAndResourcesToHTML((string)e.Data, "doc.xml", WindowsFormsBooks.Properties.Resources.bookstoreStyle, controllerBookStore, out message))
                 ControlerMessager.ShowMessage(message);

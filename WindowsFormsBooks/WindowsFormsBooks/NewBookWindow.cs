@@ -13,11 +13,27 @@ namespace WindowsFormsBooks
     {
         public Book DisplayedBook { get; private set; }
 
+        private static readonly Color errorColor = Color.LightCoral;
+        private static readonly Color noErrorColor = Color.White;
+
+        private static readonly Color minusBackColor = Color.Silver;
+        private static readonly Color minusMouseDownBackColor = Color.Gray;
+        private static readonly Color minusMouseOverBackColor = Color.DarkGray;
+
+
+        private static readonly Color enabledBackColor = Color.DarkGray;
+        private static readonly Color disabledBackColor = Color.LightGray;
+
+        private static readonly Color enabledForeColor = Color.Black;
+        private static readonly Color disabledForeColor = Color.WhiteSmoke;
+
         public NewBookWindow(Book book = null)
         {
             DisplayedBook = book;
             InitializeComponent();
             PlaceControls();
+
+            addButton.Enabled = false;
         }
 
         private void PlaceControls()
@@ -37,11 +53,67 @@ namespace WindowsFormsBooks
                     AddTextbox(DisplayedBook.Authors[i]);
                 }
 
+                titleLabel.Text = "Edit Book";
+                addButton.Text = "Edit";
             }
+
+            titleTextBox.TextChanged += new EventHandler(titleTextBox_TextChanged);
+            languageTextBox.TextChanged += new EventHandler(languageTextBox_TextChanged);
+            categoryTextBox.TextChanged += new EventHandler(categoryTextBox_TextChanged);
+            yearTextBox.TextChanged += new EventHandler(yearTextBox_TextChanged);
+            priceTextBox.TextChanged += new EventHandler(priceTextBox_TextChanged);
+            coverTextBox.TextChanged += new EventHandler(coverTextBox_TextChanged);
+            authorTextBox.TextChanged += authorTextBox_TextChanged;
+        }
+
+        void authorTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBoxTextCangeHandle(Book.OkForAuthor, (TextBox)sender);
+        }
+
+        void coverTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBoxTextCangeHandle(Book.OkForCover, (TextBox)sender);
+        }
+
+        void priceTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBoxTextCangeHandle(Book.OkForPrice, (TextBox)sender);
+        }
+
+        void yearTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBoxTextCangeHandle(Book.OkForYear, (TextBox)sender);
+        }
+
+        void categoryTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBoxTextCangeHandle(Book.OkForCategory, (TextBox)sender);
+        }
+
+        void languageTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBoxTextCangeHandle(Book.OkForLanguage, (TextBox)sender);
+        }
+
+        void titleTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBoxTextCangeHandle(Book.OkForTitle, (TextBox)sender);
+        }
+
+        private void TextBoxTextCangeHandle(Func<string,bool> Criterion, TextBox tB)
+        {
+            if (!Criterion(tB.Text))
+                tB.BackColor = errorColor;
+            else
+                tB.BackColor = noErrorColor;
+            
+            CheckAllTextBoxes();
         }
 
         private void AddTextbox(string text) 
         {
+            //text box for author
             TextBox tB = new TextBox()
             {
                 BorderStyle = BorderStyle.None,
@@ -51,34 +123,110 @@ namespace WindowsFormsBooks
                 Text = text
             };
 
-            tB.TextChanged += authorTB_TextChanged;
+            tB.TextChanged += authorTextBox_TextChanged;
 
-            tBoxflowLayoutPanel.Controls.Add(tB);
-        }
-
-        void authorTB_TextChanged(object sender, EventArgs e)
-        {
-            if (!Book.OkForAuthor(((TextBox)sender).Text))
-                ((TextBox)sender).BackColor = Color.LightCoral;
-            else
-                ((TextBox)sender).BackColor = Color.White;
-        }
-
-        private void addButton_Click(object sender, EventArgs e)
-        {
-            //no checking so far
-            if (DisplayedBook != null)
+            //delete author textBox  button
+            Button b = new Button() 
             {
+                Height = 16, Width =16,
+                FlatStyle = FlatStyle.Flat,
+                BackColor = minusBackColor,
+                Text = "x",
+                Font = new Font("MicrosoftSansSerif", 5)
+            };
+            b.FlatAppearance.BorderSize = 0;
+            b.FlatAppearance.MouseDownBackColor = minusMouseDownBackColor;
+            b.FlatAppearance.MouseOverBackColor = minusMouseOverBackColor;
 
-            }
-            else
-                DisplayedBook = new Book(titleTextBox.Text, "en", new List<string>{authorTextBox.Text},
-                    categoryTextBox.Text, Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(priceTextBox.Text)); 
+            b.Click += minusButton_Click;
+
+            //place controls
+            tBoxflowLayoutPanel.Controls.Add(tB);
+            minusBFlowLayoutPanel.Controls.Add(b);
+        }
+
+        private void minusButton_Click(object sender, EventArgs e)
+        {
+            int index= minusBFlowLayoutPanel.Controls.IndexOf((Button)sender);
+
+            //delete minus button and author textbox
+            minusBFlowLayoutPanel.Controls.RemoveAt(index);
+            tBoxflowLayoutPanel.Controls.RemoveAt((index+1));
+
+            CheckAllTextBoxes();
         }
 
         private void plusButton_Click(object sender, EventArgs e)
         {
             AddTextbox(string.Empty);
+            CheckAllTextBoxes();
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            List<string> authors = GetherAuthors();
+
+            if (DisplayedBook != null)
+            {
+                DisplayedBook.Edit(titleTextBox.Text, languageTextBox.Text, 
+                    authors, categoryTextBox.Text, Convert.ToInt32(yearTextBox.Text), 
+                    Convert.ToDouble(priceTextBox.Text), coverTextBox.Text);
+            }
+            else
+                DisplayedBook = new Book(titleTextBox.Text, languageTextBox.Text,
+                    authors, categoryTextBox.Text, Convert.ToInt32(yearTextBox.Text),
+                    Convert.ToDouble(priceTextBox.Text), coverTextBox.Text); 
+        }
+
+        private void addButton_EnabledChanged(object sender, EventArgs e)
+        {
+            if (((Button)sender).Enabled == true)
+            {
+                ((Button)sender).BackColor = enabledBackColor;
+                ((Button)sender).ForeColor = enabledForeColor;
+            }
+            else
+            {
+                ((Button)sender).BackColor = disabledBackColor;
+                ((Button)sender).ForeColor = disabledForeColor;
+            }
+        }
+
+        private void CheckAllTextBoxes() 
+        {
+            if (Book.OkForCategory(categoryTextBox.Text) &&
+                Book.OkForCover(coverTextBox.Text) &&
+                Book.OkForLanguage(languageTextBox.Text) &&
+                Book.OkForPrice(priceTextBox.Text) &&
+                Book.OkForTitle(titleTextBox.Text) &&
+                Book.OkForYear(yearTextBox.Text) && CheckAllAuthorTextBoxes())
+                addButton.Enabled = true;
+            else
+                addButton.Enabled = false;
+        }
+
+        private bool CheckAllAuthorTextBoxes() 
+        {
+            foreach (var tB in tBoxflowLayoutPanel.Controls) 
+            {
+                if (tB is TextBox) 
+                {
+                    if (!Book.OkForAuthor(((TextBox)tB).Text))
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        private List<string> GetherAuthors() 
+        {
+            List<string> l = new List<string>();
+            foreach (var tB in tBoxflowLayoutPanel.Controls) 
+            {
+                l.Add(((TextBox)tB).Text);
+            }
+
+            return l;
         }
     }
 }

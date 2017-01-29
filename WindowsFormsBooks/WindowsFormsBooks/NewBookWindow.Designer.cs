@@ -39,7 +39,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.yearLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.titleLabel = new System.Windows.Forms.Label();
             this.priceTextBox = new System.Windows.Forms.TextBox();
             this.tBoxflowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.languageTextBox = new System.Windows.Forms.TextBox();
@@ -47,6 +47,7 @@
             this.plusButton = new System.Windows.Forms.Button();
             this.languageLabel = new System.Windows.Forms.Label();
             this.coverLabel = new System.Windows.Forms.Label();
+            this.minusBFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.tBoxflowLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,12 +59,14 @@
             this.addButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.addButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addButton.ForeColor = System.Drawing.Color.Black;
             this.addButton.Location = new System.Drawing.Point(37, 231);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
             this.addButton.TabIndex = 0;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = false;
+            this.addButton.EnabledChanged += new System.EventHandler(this.addButton_EnabledChanged);
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // cancelButton
@@ -129,9 +132,8 @@
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(325, 50);
+            this.label2.Location = new System.Drawing.Point(319, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 7;
@@ -164,15 +166,15 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Price";
             // 
-            // label6
+            // titleLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label6.Location = new System.Drawing.Point(251, 9);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(112, 20);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Add new Book";
+            this.titleLabel.AutoSize = true;
+            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.titleLabel.Location = new System.Drawing.Point(251, 9);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(112, 20);
+            this.titleLabel.TabIndex = 11;
+            this.titleLabel.Text = "Add new Book";
             // 
             // priceTextBox
             // 
@@ -186,11 +188,11 @@
             // tBoxflowLayoutPanel
             // 
             this.tBoxflowLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.tBoxflowLayoutPanel.Controls.Add(this.authorTextBox);
-            this.tBoxflowLayoutPanel.Location = new System.Drawing.Point(365, 47);
+            this.tBoxflowLayoutPanel.Location = new System.Drawing.Point(359, 47);
             this.tBoxflowLayoutPanel.Name = "tBoxflowLayoutPanel";
-            this.tBoxflowLayoutPanel.Size = new System.Drawing.Size(209, 220);
+            this.tBoxflowLayoutPanel.Size = new System.Drawing.Size(199, 220);
             this.tBoxflowLayoutPanel.TabIndex = 0;
             // 
             // languageTextBox
@@ -213,14 +215,13 @@
             // 
             // plusButton
             // 
-            this.plusButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.plusButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.plusButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.plusButton.FlatAppearance.BorderSize = 0;
             this.plusButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
             this.plusButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
             this.plusButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.plusButton.Location = new System.Drawing.Point(330, 76);
+            this.plusButton.Location = new System.Drawing.Point(324, 76);
             this.plusButton.Name = "plusButton";
             this.plusButton.Size = new System.Drawing.Size(23, 23);
             this.plusButton.TabIndex = 15;
@@ -246,11 +247,19 @@
             this.coverLabel.TabIndex = 17;
             this.coverLabel.Text = "Cover";
             // 
+            // minusBFlowLayoutPanel
+            // 
+            this.minusBFlowLayoutPanel.Location = new System.Drawing.Point(563, 69);
+            this.minusBFlowLayoutPanel.Name = "minusBFlowLayoutPanel";
+            this.minusBFlowLayoutPanel.Size = new System.Drawing.Size(24, 199);
+            this.minusBFlowLayoutPanel.TabIndex = 18;
+            // 
             // NewBookWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(574, 266);
+            this.ClientSize = new System.Drawing.Size(599, 266);
+            this.Controls.Add(this.minusBFlowLayoutPanel);
             this.Controls.Add(this.coverLabel);
             this.Controls.Add(this.languageLabel);
             this.Controls.Add(this.plusButton);
@@ -258,7 +267,7 @@
             this.Controls.Add(this.languageTextBox);
             this.Controls.Add(this.tBoxflowLayoutPanel);
             this.Controls.Add(this.priceTextBox);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.yearLabel);
             this.Controls.Add(this.label3);
@@ -270,7 +279,7 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.addButton);
             this.Name = "NewBookWindow";
-            this.Text = "NewBookWindow";
+            this.Text = "Book";
             this.tBoxflowLayoutPanel.ResumeLayout(false);
             this.tBoxflowLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -291,7 +300,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label yearLabel;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.TextBox priceTextBox;
         private System.Windows.Forms.FlowLayoutPanel tBoxflowLayoutPanel;
         private System.Windows.Forms.TextBox languageTextBox;
@@ -299,5 +308,6 @@
         private System.Windows.Forms.Button plusButton;
         private System.Windows.Forms.Label languageLabel;
         private System.Windows.Forms.Label coverLabel;
+        private System.Windows.Forms.FlowLayoutPanel minusBFlowLayoutPanel;
     }
 }

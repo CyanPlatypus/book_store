@@ -154,15 +154,13 @@ namespace WindowsFormsBooks
             {
                 AddBookDialogWindow = new NewBookWindow(EditingBook);
 
-                AddBookDialogWindow.ShowDialog(this);
-                //if (AddBookDialogWindow.ShowDialog(this) == DialogResult.OK)
-                //{
-                //    Book anotherBook = AddBookDialogWindow.NewBook;
-                //    if (AddButtonClicked != null)
-                //        AddButtonClicked(this, new ObjectEventArgs(anotherBook));
-                //}
+                if (AddBookDialogWindow.ShowDialog(this) == DialogResult.OK)
+                {
+                    DGVStoreSource.ResetBindings();
+                }
 
                 AddBookDialogWindow.Dispose();
+                
                 EditingBook = null;
             }
         }

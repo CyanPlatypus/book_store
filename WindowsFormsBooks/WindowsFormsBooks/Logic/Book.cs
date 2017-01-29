@@ -98,9 +98,7 @@ namespace WindowsFormsBooks
         //for list of authors
         public Book(string title, string lang, List<string> authors, string category, int year, double price, string cover = null)
         {
-            this.Authors = authors;
-
-            InitFields( title, lang, category, year, price, cover);
+            Edit(title, lang, authors, category, year, price, cover);
         }
 
         public Book() 
@@ -111,12 +109,28 @@ namespace WindowsFormsBooks
         private void InitFields(string title, string lang, string category, int year, double price, string cover = null) 
         {
             BookTitle = new Title(title, lang);
-            //this.Lang = lang;
             this.Title = title;
             this.Category = category;
             this.Year = year;
             this.Price = price;
-            this.Cover = cover;
+
+            if (cover == string.Empty)
+                this.Cover = null;
+            else
+                this.Cover = cover;
+        }
+
+        public void Edit(string title, string lang, List<string> authors, string category, int year, double price, string cover = null) 
+        {
+            this.Authors = new List<string>();
+
+            foreach (var a in authors)
+            {
+                if (OkForAuthor(a))
+                    this.Authors.Add(a);
+            }
+
+            InitFields(title, lang, category, year, price, cover);
         }
 
         private void UpdateAuthor() 
@@ -133,8 +147,54 @@ namespace WindowsFormsBooks
 
         public static bool OkForAuthor(string str) 
         {
-            Regex regex = new Regex("[^0-9;<>%$@#+=]");
-            return regex.IsMatch(str);
+            //no numbers and ;=+()
+            Regex regex = new Regex("^([^0-9;=+()]*)$");
+            return (regex.IsMatch(str) && (str != string.Empty));
+        }
+
+        public static bool OkForCover(string str)
+        {
+            //only letters
+            Regex regex = new Regex("^([a-zA-Zа-яА-Я]*)$");
+            return (regex.IsMatch(str) || (str == string.Empty) );
+        }
+
+        public static bool OkForCategory(string str)
+        {
+            //only letters
+            Regex regex = new Regex("^([a-zA-Zа-яА-Я]*)$");
+            return (regex.IsMatch(str) && (str != string.Empty));
+        }
+
+        public static bool OkForLanguage(string str)
+        {
+            //only letters and -
+            Regex regex = new Regex("^([a-zA-Zа-яА-Я-]*)$");
+            return (regex.IsMatch(str) && (str != string.Empty));
+        }
+
+        public static bool OkForTitle(string str)
+        {
+            //only letters and spaces
+            Regex regex = new Regex("^([a-zA-Zа-яА-Я ]*)$");
+            return (regex.IsMatch(str) && (str != string.Empty));
+        }
+
+        public static bool OkForPrice(string str)
+        {
+            double res;
+            if (Double.TryParse(str, out res))
+                return true;
+            return false;
+        }
+
+        public static bool OkForYear(string str)
+        {
+            int year = DateTime.Now.Year;
+            int res;
+            if (Int32.TryParse(str, out res) && (res <= year))
+                return true;
+            return false;
         }
     }
 }

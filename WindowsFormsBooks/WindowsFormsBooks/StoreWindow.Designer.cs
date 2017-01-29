@@ -162,7 +162,7 @@
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.storeDataGridView);
             this.Name = "StoreWindow";
-            this.Text = "Form1";
+            this.Text = "Book Store";
             ((System.ComponentModel.ISupportInitialize)(this.storeDataGridView)).EndInit();
             this.ResumeLayout(false);
 

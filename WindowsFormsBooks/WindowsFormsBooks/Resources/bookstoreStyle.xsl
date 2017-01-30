@@ -4,14 +4,23 @@
 <html> 
 <body>
   <style>
-  table {
-    border-collapse: collapse;
-  }
-  th, td {
+    table {
+    border-collapse: collapse; /* makes border between cells single*/
+    }
+    th, td {
     border: 1px solid black;
     padding: 10px;
     text-align: left;
-  }
+    }
+    li {
+    list-style-type: none; /* removes markers */
+    }
+    ul {
+    margin-left: 0; /* removes left and bottom indents in IE and Opera */
+    margin-bottom: 0;
+    padding-left: 0; /* removes left and bottom indents in Firefox, Safari, Chrome */
+    padding-bottom: 0;
+    }
   </style>
   <table>
     <tr bgcolor="#e0e0e0">
@@ -24,7 +33,13 @@
     <xsl:for-each select="bookstore/book">
     <tr>
       <td><xsl:value-of select="title"/></td>
-      <td><xsl:value-of select="author"/></td>
+      <td>
+        <ul>
+          <xsl:for-each select="author">
+            <li><xsl:value-of select="."/></li>
+          </xsl:for-each>
+        </ul>
+      </td>
       <td><xsl:value-of select="@category"/></td>
       <td><xsl:value-of select="year"/></td>
       <td><xsl:value-of select="price"/></td>
